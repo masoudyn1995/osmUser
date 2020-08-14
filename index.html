@@ -54,10 +54,25 @@
         API.</p>
         <script src='osmauth.js'></script>
         <script>
-        var auth = osmAuth({
+            var auth = osmAuth({
             oauth_secret: 'oHHbvQEYot904iTzWPgjIHdjKzpLU3IdAWnilasz',
-            oauth_consumer_key: 'fYEGIWV9obvUypZRRicreYxBghKh254KJILJeVK3' 
-        });
+            oauth_consumer_key: 'fYEGIWV9obvUypZRRicreYxBghKh254KJILJeVK3',
+                auto: true // show a login form if the user is not authenticated and
+                           // you try to do a call
+            });
+
+            document.getElementById('authenticate').onclick = function() {
+                // Signed method call - since `auto` is true above, this will
+                // automatically start an authentication process if the user isn't
+                // authenticated yet.
+                auth.xhr({
+                    method: 'GET',
+                    path: '/api/0.6/user/details'
+                }, function(err, details) {
+                    // details is an XML DOM of user details
+                });
+            };
+            
         function done(err, res) {
             if (err) {
                 document.getElementById('user').innerHTML = 'error! try clearing your browser cache';
@@ -76,14 +91,6 @@
             }
             document.getElementById('user').style.display = 'block';
         }
-
-        document.getElementById('authenticate').onclick = function() {
-            if (!auth.bringPopupWindowToFront()) {
-                auth.authenticate(function() {
-                    update();
-                });
-            }
-        };
 
         function showDetails() {
             auth.xhr({
