@@ -4,6 +4,7 @@
 
 
 ## osm-auth
+https://github.com/osmlab/osm-auth
 
 Easy authentication with [OpenStreetMap](http://www.openstreetmap.org/)
 over [OAuth](http://oauth.net/) with
