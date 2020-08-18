@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>osm-auth</title>
+        <link rel='stylesheet' type='text/css' href='' />
+        <meta http-equiv='content-type' content='text/html; charset=utf-8' />
+    </head>
+    <body>
+        <button id='authenticate'>login</button>
+        <button id='logout'>logout</button>
+        <script src='osmauth.js'></script>
+        <script>
+        var auth = osmAuth({
+            oauth_secret: 'fYEGIWV9obvUypZRRicreYxBghKh254KJILJeVK3',
+            oauth_consumer_key: 'oHHbvQEYot904iTzWPgjIHdjKzpLU3IdAWnilasz',
+            auto: true
+        });
+
+        document.getElementById('authenticate').onclick = function() {
+        auth.xhr({
+        method: 'GET',
+        path: '/api/0.6/user/details'
+        }, function(err, details) {
+        });
+        };
+        
+        </script>
+    </body>
+</html>
